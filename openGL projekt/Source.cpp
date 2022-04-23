@@ -7,54 +7,13 @@
 #include"EBO.h"
 #include"VAO.h"
 #include"VBO.h"
+#include"Matrix4f.h"
 
-class Matrix4f
-{
-public:
-	float m[4][4] = { {0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0} };
+constexpr float M_PI = 3.14159;
 
-	Matrix4f() {};
-	Matrix4f(float a00, float a01, float a02, float a03,
-			 float a10, float a11, float a12, float a13,
-			 float a20, float a21, float a22, float a23,
-		 	 float a30, float a31, float a32, float a33)
-	{
-		m[0][0] = a00; m[0][1] = a01; m[0][2] = a02; m[0][3] = a03;
-		m[1][0] = a10; m[1][1] = a11; m[1][2] = a12; m[1][3] = a13;
-		m[2][0] = a20; m[2][1] = a21; m[2][2] = a22; m[2][3] = a23;
-		m[3][0] = a30; m[3][1] = a31; m[3][2] = a32; m[3][3] = a33;
-	}
+const int number_of_elements = 100;
 
-	Matrix4f(Matrix4f m1, Matrix4f m2)
-	{
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				for (int k = 0; k < 4; k++)
-				{
-					m[i][j] += m1.m[i][k] * m2.m[k][j];
-				}
-			}
-		}
-	}
-};
-
-GLfloat vertices[] =
-{
-	-0.1,	0.1,	1.0,	0.0,	0.0,
-	0.1,	0.1,	0.0,	1.0,	0.0,
-	0.1,	-0.1,	0.0,	0.0,	1.0,
-	-0.1,	-0.1,	0.0,	1.0,	0.0
-};
-
-GLuint indices[] =
-{
-	0,1,2,
-	2,3,0
-};
-
-GLfloat* circleVertices(float radius, float pos[2], float color[3], int number_of_elements = 360)
+GLfloat* circleVertices(float radius, float pos[2], float color[3], int number_of_elements)
 {
 	int size = 5 * (number_of_elements + 1);
 	GLfloat* result = new GLfloat[size];
@@ -68,9 +27,11 @@ GLfloat* circleVertices(float radius, float pos[2], float color[3], int number_o
 
 	for (int i = 1; i < size / 5; i++)
 	{
-		float angle = 2.0f * 3.1415926f * i / number_of_elements;
-		result[5 * i] =		pos[0] + radius * cosf(angle);
-		result[5 * i + 1] = pos[1] + radius * sinf(angle);
+		float angle = 2.0f * M_PI  * float(i) / float(number_of_elements-1);
+		float dx = radius * cosf(angle);
+		float dy = radius * sinf(angle);
+		result[5 * i] =		pos[0] + dx;
+		result[5 * i + 1] = pos[1] + dy;
 		result[5 * i + 2] = color[0];
 		result[5 * i + 3] = color[1];
 		result[5 * i + 4] = color[2];
@@ -80,15 +41,21 @@ GLfloat* circleVertices(float radius, float pos[2], float color[3], int number_o
 
 GLuint* circleIndices(int number_of_elements)
 {
-	int size = 3 * number_of_elements;
+	int size = number_of_elements+1;
 	GLuint* result = new GLuint[size];
+	for (int i = 0; i < size; i++)
+	{
+		result[i] = i;
+	}
 	return result;
 }
 
-float circlePosition[2] = { 0,0 };
+float circlePosition[2] = { .2f,0 };
 float circleColor[3] = { 1,0,0 };
-GLfloat* vertices2 = circleVertices(1.0f, circlePosition, circleColor);
-int size_of_vertices = (5 * 360 + 5)/sizeof(GLfloat);
+GLfloat* vertices2 = circleVertices(0.2f, circlePosition, circleColor, number_of_elements);
+int size_of_vertices = (5 * number_of_elements + 5)*sizeof(GLfloat);
+GLuint* indices2 = circleIndices(number_of_elements);
+int size_of_indices = (number_of_elements + 1) * sizeof(GLuint);
 
 int main()
 {
@@ -120,14 +87,12 @@ int main()
 	VAO VAO1;
 	VAO1.bind();
 
-	//GLint translationLocation = glGetUniformLocation(shaderProgram.ID, "translation");
-	//GLint rotationLocation = glGetUniformLocation(shaderProgram.ID, "rotation");
-	//GLint scaleLocation = glGetUniformLocation(shaderProgram.ID, "scale");
 
 	GLint transformationLocation = glGetUniformLocation(shaderProgram.ID, "transformation");
 
-	VBO VBO1(vertices, sizeof(vertices));
-	EBO EBO1(indices, sizeof(indices));
+	VBO VBO1(vertices2, size_of_vertices);
+	EBO EBO1(indices2, size_of_indices);
+	GLuint elemSize = size_of_indices/sizeof(GLuint);
 
 	VAO1.LinkVBO(VBO1, 0, 1);
 
@@ -135,7 +100,6 @@ int main()
 	VBO1.unbind();
 	EBO1.unbind();
 	float timer = .0f;
-	GLuint elemSize = sizeof(indices) / sizeof(GLuint);
 	while (!glfwWindowShouldClose(window))
 	{
 		// Ustaw kolor t³a (RGBA, z przedzia³u <0, 1>)
@@ -146,11 +110,11 @@ int main()
 		shaderProgram.Activate();
 
 		//argumenty do translacji obiektu
-		float translate_x = 0.f;
-		float translate_y = 0.f;
+		float translate_x = cosf(2.f * M_PI * timer)/5;
+		float translate_y = sinf(2.f * M_PI * timer)/5;
 
 		//argumenty do rotacji obiektu
-		float angle_of_rotation = 2.0f * 3.14f * timer;
+		float angle_of_rotation = 0.f;
 
 		//argumenty do skalowania obiektu
 		float scale_x = 0.f;
@@ -178,10 +142,10 @@ int main()
 
 		VAO1.bind();
 		// Narysuj trójk¹t
-		glDrawElements(GL_TRIANGLES, elemSize, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLE_FAN, elemSize, GL_UNSIGNED_INT, 0);
 		// Odœwie¿ widok
 		glfwSwapBuffers(window);
-		glfwWaitEventsTimeout(1./ 30.);
+		glfwWaitEventsTimeout(1./ 60.);
 		timer = (timer > 1.0f) ? .0f : timer + 0.01f;
 	}
 
