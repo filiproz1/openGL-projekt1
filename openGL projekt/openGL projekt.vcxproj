@@ -146,6 +146,7 @@
     <ClCompile Include="EBO.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="Matrix4f.cpp" />
+    <ClCompile Include="DiscArrays.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="ShaderClass.cpp" />
     <ClCompile Include="VAO.cpp" />
@@ -158,6 +159,7 @@
     <None Include="default.frag" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DiscArrays.h" />
     <ClInclude Include="EBO.h" />
     <ClInclude Include="Matrix4f.h" />
     <ClInclude Include="VAO.h" />

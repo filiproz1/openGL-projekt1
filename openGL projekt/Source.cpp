@@ -8,57 +8,21 @@
 #include"VAO.h"
 #include"VBO.h"
 #include"Matrix4f.h"
+#include"DiscArrays.h"
 
 constexpr float M_PI = 3.14159;
 
+/* dummy variables----------------------- */
 const int number_of_elements = 100;
-
-GLfloat* circleVertices(float radius, float pos[2], float color[3], int number_of_elements)
-{
-	int size = 5 * (number_of_elements + 1);
-	GLfloat* result = new GLfloat[size];
-
-	//punkt œrodka ko³a - wspó³rzêdne i kolor
-	result[0] = pos[0];
-	result[1] = pos[1];
-	result[2] = color[0];
-	result[3] = color[1];
-	result[4] = color[2];
-
-	for (int i = 1; i < size / 5; i++)
-	{
-		float angle = 2.0f * M_PI  * float(i) / float(number_of_elements-1);
-		float dx = radius * cosf(angle);
-		float dy = radius * sinf(angle);
-		result[5 * i] =		pos[0] + dx;
-		result[5 * i + 1] = pos[1] + dy;
-		result[5 * i + 2] = color[0];
-		result[5 * i + 3] = color[1];
-		result[5 * i + 4] = color[2];
-	}
-	return result;
-}
-
-GLuint* circleIndices(int number_of_elements)
-{
-	int size = number_of_elements+1;
-	GLuint* result = new GLuint[size];
-	for (int i = 0; i < size; i++)
-	{
-		result[i] = i;
-	}
-	return result;
-}
-
 float circlePosition[2] = { .2f,0 };
 float circleColor[3] = { 1,0,0 };
-GLfloat* vertices2 = circleVertices(0.2f, circlePosition, circleColor, number_of_elements);
-int size_of_vertices = (5 * number_of_elements + 5)*sizeof(GLfloat);
-GLuint* indices2 = circleIndices(number_of_elements);
-int size_of_indices = (number_of_elements + 1) * sizeof(GLuint);
+/*----------------------------------------*/
 
 int main()
 {
+	DiscArrays disc1(number_of_elements);
+	disc1.discVertices(0.2f, circlePosition, circleColor, number_of_elements);
+	disc1.discIndices(number_of_elements);
 	// Initialize GLFW
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -90,9 +54,9 @@ int main()
 
 	GLint transformationLocation = glGetUniformLocation(shaderProgram.ID, "transformation");
 
-	VBO VBO1(vertices2, size_of_vertices);
-	EBO EBO1(indices2, size_of_indices);
-	GLuint elemSize = size_of_indices/sizeof(GLuint);
+	VBO VBO1(disc1.vertices, disc1.vertices_size);
+	EBO EBO1(disc1.indices, disc1.indices_size);
+	GLuint elemSize = disc1.indices_length;
 
 	VAO1.LinkVBO(VBO1, 0, 1);
 
