@@ -16,6 +16,22 @@ DiscArrays::DiscArrays(int number_of_elements)
 
 }
 
+DiscArrays::DiscArrays()
+{
+
+}
+
+void DiscArrays::init(int number_of_elements)
+{
+	indices_length = number_of_elements + 1;
+	indices_size = indices_length * sizeof(GLuint);
+	indices = new GLuint[indices_length];
+
+	vertices_length = 5 * (number_of_elements + 1);
+	vertices_size = vertices_length * sizeof(GLfloat);
+	vertices = new GLfloat[vertices_length];
+}
+
 void DiscArrays::discIndices(int number_of_elements)
 {
 	for (int i = 0; i < indices_length; i++)

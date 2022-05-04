@@ -10,7 +10,9 @@ public:
 	int indices_length{};
 	int vertices_length{};
 
+	DiscArrays();
 	DiscArrays(int number_of_elements);
+	void init(int number_of_elements);
 	void discVertices(float radius, float pos[2], float color[3], int number_of_elements);
 	void discIndices(int number_of_elements);
 };
