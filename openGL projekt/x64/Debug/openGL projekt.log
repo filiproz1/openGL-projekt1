@@ -1,0 +1,24 @@
+﻿  Source.cpp
+C:\Users\toja\Documents\proj\openGL-projekt1-master(1)\openGL-projekt1-master\openGL projekt\Source.cpp(13,31): warning C4305: "inicjowanie": obcięcie z "double" do "const float"
+C:\Users\toja\Documents\proj\openGL-projekt1-master(1)\openGL-projekt1-master\openGL projekt\Source.cpp(219,22): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\toja\Documents\proj\openGL-projekt1-master(1)\openGL-projekt1-master\openGL projekt\Source.cpp(220,22): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\toja\Documents\proj\openGL-projekt1-master(1)\openGL-projekt1-master\openGL projekt\Source.cpp(244,22): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\toja\Documents\proj\openGL-projekt1-master(1)\openGL-projekt1-master\openGL projekt\Source.cpp(245,22): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\toja\Documents\proj\openGL-projekt1-master(1)\openGL-projekt1-master\openGL projekt\Source.cpp(268,22): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\toja\Documents\proj\openGL-projekt1-master(1)\openGL-projekt1-master\openGL projekt\Source.cpp(269,22): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\toja\Documents\proj\openGL-projekt1-master(1)\openGL-projekt1-master\openGL projekt\Source.cpp(274,31): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\toja\Documents\proj\openGL-projekt1-master(1)\openGL-projekt1-master\openGL projekt\Source.cpp(273,52): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\toja\Documents\proj\openGL-projekt1-master(1)\openGL-projekt1-master\openGL projekt\Source.cpp(292,22): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\toja\Documents\proj\openGL-projekt1-master(1)\openGL-projekt1-master\openGL projekt\Source.cpp(293,22): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\toja\Documents\proj\openGL-projekt1-master(1)\openGL-projekt1-master\openGL projekt\Source.cpp(298,32): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\toja\Documents\proj\openGL-projekt1-master(1)\openGL-projekt1-master\openGL projekt\Source.cpp(297,53): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\toja\Documents\proj\openGL-projekt1-master(1)\openGL-projekt1-master\openGL projekt\Source.cpp(316,22): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\toja\Documents\proj\openGL-projekt1-master(1)\openGL-projekt1-master\openGL projekt\Source.cpp(317,22): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\toja\Documents\proj\openGL-projekt1-master(1)\openGL-projekt1-master\openGL projekt\Source.cpp(321,32): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\toja\Documents\proj\openGL-projekt1-master(1)\openGL-projekt1-master\openGL projekt\Source.cpp(320,53): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\toja\Documents\proj\openGL-projekt1-master(1)\openGL-projekt1-master\openGL projekt\Source.cpp(339,22): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\toja\Documents\proj\openGL-projekt1-master(1)\openGL-projekt1-master\openGL projekt\Source.cpp(340,22): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\toja\Documents\proj\openGL-projekt1-master(1)\openGL-projekt1-master\openGL projekt\Source.cpp(344,32): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\toja\Documents\proj\openGL-projekt1-master(1)\openGL-projekt1-master\openGL projekt\Source.cpp(343,53): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+LINK : warning LNK4098: domyślna biblioteka "MSVCRT" powoduje konflikt z innymi bibliotekami; użyj opcji /NODEFAULTLIB:biblioteka
+  openGL projekt.vcxproj -> C:\Users\toja\Documents\proj\openGL-projekt1-master(1)\openGL-projekt1-master\x64\Debug\openGL projekt.exe
